@@ -15,15 +15,16 @@ import org.testng.annotations.Test;
 public class LoginTest {
 	WebDriver driver;
 
-	@BeforeMethod
-	public void setup() {
-		System.setProperty("webdriver.chrome.driver",
-				"C:\\Selenium webdriver\\ChromeDriver\\chromedriver-win64\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.get("https://d3lb3cevpf2y2n.cloudfront.net/");
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-	}
+	@BeforeClass
+        public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // Run Chrome in headless mode
+        options.addArguments("--no-sandbox"); // Avoids issues with Docker containers
+        options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource issues in CI/CD
+        driver = new ChromeDriver(options);
+	driver.get("https://d3lb3cevpf2y2n.cloudfront.net/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        }
 	
 	@Test
 	public void LoginWithValidEmailAndValidPassword() throws InterruptedException {

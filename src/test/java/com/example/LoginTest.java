@@ -25,6 +25,7 @@ public class LoginTest {
         driver = new ChromeDriver(options);
 	driver.get("https://d3lb3cevpf2y2n.cloudfront.net/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+	driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         }
 	
 	@Test

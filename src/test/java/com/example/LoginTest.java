@@ -48,7 +48,7 @@ public class LoginTest {
         passwordField.sendKeys("Gravity@123");
         loginButton.click();
 
-        Assert.assertTrue(driver.findElement(By.id("logout")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.id("logou")).isDisplayed());
     }
 
     @AfterClass

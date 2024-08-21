@@ -51,6 +51,7 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@456");
         driver.findElement(By.id("1-submit")).click();
+        Thread.sleep(3000);	
         Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
 	}
 	
@@ -60,6 +61,7 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deep@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak");
         driver.findElement(By.id("1-submit")).click();
+        Thread.sleep(3000);
         Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
 	}
 

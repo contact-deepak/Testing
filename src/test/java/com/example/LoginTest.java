@@ -98,6 +98,77 @@ public class LoginTest {
         Assert.assertTrue(driver.findElement(By.className("ant-dropdown-trigger")).isDisplayed());
 	}
 
+	@Test
+	public void LoginWithValidEmailAndValidPassword() throws InterruptedException {
+        driver.findElement(By.className("login-btn")).click();
+        driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
+        driver.findElement(By.id("1-password")).sendKeys("Deepak@123");
+        driver.findElement(By.id("1-submit")).click();
+        Assert.assertTrue(driver.findElement(By.className("ant-dropdown-trigger")).isDisplayed());
+	}
+	
+	@Test
+	public void LoginWithInvalidEmailAndValidPassword() throws InterruptedException {
+        driver.findElement(By.className("login-btn")).click();
+        driver.findElement(By.id("1-email")).sendKeys("contact.deep@gmail.com");
+        driver.findElement(By.id("1-password")).sendKeys("Deepak@123");
+        driver.findElement(By.id("1-submit")).click();
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
+	}
+	
+	@Test
+	public void LoginWithValidEmailAndInvalidPassword() throws InterruptedException {
+        driver.findElement(By.className("login-btn")).click();
+        driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
+        driver.findElement(By.id("1-password")).sendKeys("Deepak@456");
+        driver.findElement(By.id("1-submit")).click();
+        Thread.sleep(3000);	
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
+	}
+	
+	@Test
+	public void LoginWithInvalidEmailAndInvalidPassword() throws InterruptedException {
+        driver.findElement(By.className("login-btn")).click();
+        driver.findElement(By.id("1-email")).sendKeys("contact.deep@gmail.com");
+        driver.findElement(By.id("1-password")).sendKeys("Deepak");
+        driver.findElement(By.id("1-submit")).click();
+        Thread.sleep(3000);
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
+	}
+
+	@Test
+	public void ForgotPasswordWithValidEmail() throws InterruptedException {
+        driver.findElement(By.className("login-btn")).click();
+        driver.findElement(By.className("auth0-lock-alternative-link")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.id("1-email")).sendKeys("deepak1@gmail.com");
+        driver.findElement(By.id("1-submit")).click();
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-success")).isDisplayed());
+	}
+	
+	@Test
+	public void ForgotPasswordWithInvalidEmail() throws InterruptedException {
+        driver.findElement(By.className("login-btn")).click();
+        driver.findElement(By.className("auth0-lock-alternative-link")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.id("1-email")).sendKeys("deepak0@gmail.com");
+        driver.findElement(By.id("1-submit")).click();
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-success")).isDisplayed());
+	}
+
+	@Test
+	public void ContinueWithGoogle() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.findElement(By.className("login-btn")).click();
+        driver.findElement(By.xpath("//a[@data-provider='google-oauth2']")).click();
+        driver.findElement(By.id("identifierId")).sendKeys("gravityaitest1@gmail.com");
+        driver.findElement(By.className("VfPpkd-LgbsSe-OWXEXe-k8QpJ")).click();
+        driver.findElement(By.name("Passwd")).sendKeys("Gravity@123");
+        WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("VfPpkd-LgbsSe-OWXEXe-k8QpJ")));
+        nextButton.click();
+        Assert.assertTrue(driver.findElement(By.className("ant-dropdown-trigger")).isDisplayed());
+	}
+
 	@AfterMethod
 	public void close() {
 		driver.close();

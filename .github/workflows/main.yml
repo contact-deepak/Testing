@@ -42,8 +42,9 @@ jobs:
     - name: Run tests
       run: mvn test
 
-    - name: Archive Test Report
+    - name: Archive test results
+      if: always()  # This ensures the step runs regardless of previous failures
       uses: actions/upload-artifact@v3
       with:
-        name: selenium-test-report
+        name: test-results
         path: target/surefire-reports/

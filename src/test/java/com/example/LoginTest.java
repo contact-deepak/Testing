@@ -20,7 +20,7 @@ public class LoginTest {
 	@BeforeMethod
         public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        // Run Chrome in headless mode
+        options.addArguments("--headless");// Run Chrome in headless mode
         options.addArguments("--no-sandbox"); // Avoids issues with Docker containers
         options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource issues in CI/CD
         driver = new ChromeDriver(options);
@@ -35,8 +35,9 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@123");
         driver.findElement(By.id("1-submit")).click();
-	Thread.sleep(3000);	
-        Assert.assertTrue(driver.findElement(By.className("ant-dropdown-trigger")).isDisplayed());
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ant-dropdown-trigger")));	
+        Assert.assertTrue(dropdown).isDisplayed());
 	}
 	
 	@Test
@@ -45,8 +46,9 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deep@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@123");
         driver.findElement(By.id("1-submit")).click();
-	Thread.sleep(3000);	
-        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
+        Assert.assertTrue(dropdown).isDisplayed());	
 	}
 	
 	@Test
@@ -55,8 +57,9 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@456");
         driver.findElement(By.id("1-submit")).click();
-        Thread.sleep(3000);	
-        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
+        Assert.assertTrue(dropdown).isDisplayed());
 	}
 	
 	@Test
@@ -65,8 +68,9 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deep@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak");
         driver.findElement(By.id("1-submit")).click();
-        Thread.sleep(3000);
-        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
+        Assert.assertTrue(dropdown).isDisplayed());
 	}
 
 	@Test

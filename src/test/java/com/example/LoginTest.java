@@ -41,16 +41,7 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@123");
         driver.findElement(By.id("1-submit")).click();
-	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-    try {
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ant-dropdown-trigger")));
-        Assert.assertTrue(errorMessage.isDisplayed(), "Error message should be displayed.");
-    } catch (TimeoutException e) {
-        Assert.fail("The error message did not appear within the expected time.");
-	    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-FileUtils.copyFile(screenshot, new File("screenshot.png"));
-
-    }
+        Assert.assertTrue(driver.findElement(By.className("ant-dropdown-trigger")).isDisplayed());
 	}
 	
 	@Test
@@ -59,9 +50,7 @@ FileUtils.copyFile(screenshot, new File("screenshot.png"));
         driver.findElement(By.id("1-email")).sendKeys("contact.deep@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@123");
         driver.findElement(By.id("1-submit")).click();
-	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
-        Assert.assertTrue(dropdown.isDisplayed());	
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
 	}
 	
 	@Test
@@ -70,9 +59,7 @@ FileUtils.copyFile(screenshot, new File("screenshot.png"));
         driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@456");
         driver.findElement(By.id("1-submit")).click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
-        Assert.assertTrue(dropdown.isDisplayed());
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
 	}
 	
 	@Test
@@ -81,9 +68,7 @@ FileUtils.copyFile(screenshot, new File("screenshot.png"));
         driver.findElement(By.id("1-email")).sendKeys("contact.deep@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak");
         driver.findElement(By.id("1-submit")).click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
-        Assert.assertTrue(dropdown.isDisplayed());
+        Assert.assertTrue(driver.findElement(By.className("auth0-global-message-error")).isDisplayed());
 	}
 
 	@Test
@@ -93,7 +78,6 @@ FileUtils.copyFile(screenshot, new File("screenshot.png"));
         Thread.sleep(3000);
         driver.findElement(By.id("1-email")).sendKeys("deepak1@gmail.com");
         driver.findElement(By.id("1-submit")).click();
-	Thread.sleep(3000);
         Assert.assertTrue(driver.findElement(By.className("auth0-global-message-success")).isDisplayed());
 	}
 	
@@ -104,7 +88,6 @@ FileUtils.copyFile(screenshot, new File("screenshot.png"));
         Thread.sleep(3000);
         driver.findElement(By.id("1-email")).sendKeys("deepak0@gmail.com");
         driver.findElement(By.id("1-submit")).click();
-	Thread.sleep(3000);
         Assert.assertTrue(driver.findElement(By.className("auth0-global-message-success")).isDisplayed());
 	}
 
@@ -116,12 +99,11 @@ FileUtils.copyFile(screenshot, new File("screenshot.png"));
         driver.findElement(By.id("identifierId")).sendKeys("gravityaitest1@gmail.com");
         driver.findElement(By.className("VfPpkd-LgbsSe-OWXEXe-k8QpJ")).click();
         driver.findElement(By.name("Passwd")).sendKeys("Gravity@123");
-	Thread.sleep(3000);
         WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(By.className("VfPpkd-LgbsSe-OWXEXe-k8QpJ")));
         nextButton.click();
         Assert.assertTrue(driver.findElement(By.className("ant-dropdown-trigger")).isDisplayed());
 	}
-
+	
 	@AfterMethod
 	public void close() {
 		driver.close();

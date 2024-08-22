@@ -20,7 +20,7 @@ public class LoginTest {
 	@BeforeMethod
         public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // Run Chrome in headless mode
+        // Run Chrome in headless mode
         options.addArguments("--no-sandbox"); // Avoids issues with Docker containers
         options.addArguments("--disable-dev-shm-usage"); // Overcome limited resource issues in CI/CD
         driver = new ChromeDriver(options);

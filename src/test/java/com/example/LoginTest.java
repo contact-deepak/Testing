@@ -108,7 +108,7 @@ public class LoginTest {
 	public void close() {
 		driver.close();
 	}
-    }
+    
 
 }
 

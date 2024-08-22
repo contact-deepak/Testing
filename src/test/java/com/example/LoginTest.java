@@ -37,7 +37,7 @@ public class LoginTest {
         driver.findElement(By.id("1-submit")).click();
 	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ant-dropdown-trigger")));	
-        Assert.assertTrue(dropdown).isDisplayed());
+        Assert.assertTrue(dropdown.isDisplayed());
 	}
 	
 	@Test
@@ -48,7 +48,7 @@ public class LoginTest {
         driver.findElement(By.id("1-submit")).click();
 	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
-        Assert.assertTrue(dropdown).isDisplayed());	
+        Assert.assertTrue(dropdown.isDisplayed());	
 	}
 	
 	@Test
@@ -59,7 +59,7 @@ public class LoginTest {
         driver.findElement(By.id("1-submit")).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
-        Assert.assertTrue(dropdown).isDisplayed());
+        Assert.assertTrue(dropdown.isDisplayed());
 	}
 	
 	@Test
@@ -70,7 +70,7 @@ public class LoginTest {
         driver.findElement(By.id("1-submit")).click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".auth0-global-message-error")));	
-        Assert.assertTrue(dropdown).isDisplayed());
+        Assert.assertTrue(dropdown.isDisplayed());
 	}
 
 	@Test

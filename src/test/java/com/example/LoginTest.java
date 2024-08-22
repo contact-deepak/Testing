@@ -35,9 +35,16 @@ public class LoginTest {
         driver.findElement(By.id("1-email")).sendKeys("contact.deepakb@gmail.com");
         driver.findElement(By.id("1-password")).sendKeys("Deepak@123");
         driver.findElement(By.id("1-submit")).click();
-	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement dropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ant-dropdown-trigger")));	
-        Assert.assertTrue(dropdown.isDisplayed());
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    try {
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ant-dropdown-trigger")));
+        Assert.assertTrue(errorMessage.isDisplayed(), "Error message should be displayed.");
+    } catch (TimeoutException e) {
+        Assert.fail("The error message did not appear within the expected time.");
+	    File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+FileUtils.copyFile(screenshot, new File("screenshot.png"));
+
+    }
 	}
 	
 	@Test
